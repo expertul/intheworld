@@ -7,46 +7,33 @@ class AIJokeGenerator {
         this.uniqueJokes = 0;
         this.currentJokeId = 0;
         
-        // AI-powered joke templates and patterns
+        // AI-powered joke templates and patterns - LONG JOKES (up to 10 lines)
         this.jokePatterns = [
-            // Question-Answer format
+            // Long Story format
+            { type: 'story', templates: [
+                "So {subject} walks into {action} and the bartender says, \"We don't serve {subject} here.\"\n{subject} says, \"That's okay, I don't drink anyway.\"\nThe bartender says, \"Then why are you here?\"\n{subject} replies, \"I heard you have the best {punchline} in town.\"\nThe bartender laughs and says, \"You're right!\"\n{subject} says, \"Great! Can I have one?\"\nThe bartender says, \"Sure, but it's going to cost you.\"\n{subject} says, \"How much?\"\nThe bartender says, \"{punchline}!\"\n{subject} says, \"That's expensive, but worth it!\"",
+                
+                "A {subject} goes to {action} and sees a sign that says \"{punchline}\".\n{subject} thinks, \"That's strange, but I'll try it.\"\n{subject} orders the {punchline} and the waiter brings it.\n{subject} takes a bite and says, \"This is amazing!\"\nThe waiter says, \"I'm glad you like it!\"\n{subject} says, \"What's the secret ingredient?\"\nThe waiter says, \"{punchline}!\"\n{subject} says, \"Really? That's incredible!\"\nThe waiter says, \"Yes, and it's our specialty!\"\n{subject} says, \"I'll definitely come back for more!\"",
+                
+                "Once upon a time, {subject} decided to {action}.\n{subject} thought it would be easy, but it wasn't.\n{subject} tried and tried, but nothing worked.\nFinally, {subject} asked for help from {punchline}.\n{punchline} said, \"I can help you, but first you need to {action}.\"\n{subject} said, \"But that's what I'm trying to do!\"\n{punchline} said, \"Ah, I see the problem!\"\n{subject} said, \"What's the problem?\"\n{punchline} said, \"You're doing it wrong! Here's how to do it right.\"\n{subject} followed the advice and finally succeeded!",
+                
+                "A {subject} and a {action} walk into a bar.\nThe bartender says, \"What can I get you?\"\n{subject} says, \"I'll have a {punchline}.\"\n{action} says, \"I'll have the same.\"\nThe bartender says, \"Coming right up!\"\n{subject} says, \"This is the best {punchline} I've ever had!\"\n{action} says, \"I agree! It's amazing!\"\nThe bartender says, \"I'm glad you like it!\"\n{subject} says, \"What's your secret?\"\nThe bartender says, \"{punchline}!\"",
+                
+                "My {subject} called me and said, \"I need help with {action}.\"\nI said, \"What's the problem?\"\n{subject} said, \"I can't figure out how to {action}.\"\nI said, \"That's easy! Here's what you do.\"\nI explained the process step by step.\n{subject} said, \"That makes sense!\"\nI said, \"Try it and let me know how it goes.\"\n{subject} called back later and said, \"It worked perfectly!\"\nI said, \"Great! I'm glad I could help.\"\n{subject} said, \"Thank you! You're the best {punchline}!\""
+            ]},
+            // Long Question-Answer format
             { type: 'qa', templates: [
-                "Why did {subject} {action}? Because {punchline}!",
-                "What do you call {subject} that {action}? {punchline}!",
-                "How does {subject} {action}? {punchline}!",
-                "Why don't {subject} {action}? Because {punchline}!",
-                "What's the difference between {subject} and {punchline}? {subject} {action}!",
-                "Why did {subject} go to {action}? To {punchline}!",
-                "What do you get when you cross {subject} with {action}? {punchline}!",
-                "Why did {subject} {action}? {punchline}!",
-                "What's {subject}'s favorite {action}? {punchline}!",
-                "Why don't {subject} ever {action}? Because {punchline}!"
+                "Why did {subject} {action}?\nBecause {subject} heard that {punchline} was the best way to {action}.\nBut when {subject} tried it, nothing happened.\nSo {subject} asked {punchline} for advice.\n{punchline} said, \"You're doing it wrong!\"\n{subject} said, \"How should I do it?\"\n{punchline} said, \"Like this!\"\n{subject} tried again and it worked perfectly!\n{subject} said, \"Thank you! That was amazing!\"\n{punchline} said, \"You're welcome! Now you know the secret!\"",
+                
+                "What do you call {subject} that {action}?\nYou call them {punchline}!\nBut why do you call them that?\nBecause {subject} is so good at {action} that everyone is amazed.\nHow good are they?\nSo good that {punchline} is the only word that describes them.\nReally?\nYes! {subject} is the best at {action} in the whole world.\nWow! That's incredible!\nI know! That's why we call them {punchline}!\nThat makes perfect sense!",
+                
+                "How does {subject} {action}?\n{subject} {action} by using {punchline}.\nBut how does {punchline} work?\n{punchline} works by combining {action} with special techniques.\nWhat kind of techniques?\nThe kind that make {subject} amazing at {action}.\nReally?\nYes! {subject} has been practicing for years.\nHow long?\nLong enough to become the best at {action}.\nThat's impressive!\nI know! That's why {subject} is so good at {punchline}!"
             ]},
-            // Statement format
-            { type: 'statement', templates: [
-                "{subject} walks into {action} and says, \"{punchline}\"",
-                "I told {subject} a joke about {action}. {punchline}",
-                "{subject} is so {action} that {punchline}",
-                "My {subject} asked me to {action}. I said, \"{punchline}\"",
-                "{subject} and {action} walk into a bar. {punchline}",
-                "I tried to {action} with {subject}, but {punchline}",
-                "{subject} said to {action}, \"{punchline}\"",
-                "The {subject} was {action} until {punchline}",
-                "I asked {subject} to {action}, and they said, \"{punchline}\"",
-                "{subject} went to {action} and discovered {punchline}"
-            ]},
-            // One-liner format
-            { type: 'oneliner', templates: [
-                "{subject} {action} {punchline}",
-                "I'm not {subject}, but I {action} {punchline}",
-                "{subject} is like {action} - {punchline}",
-                "I told my {subject} I {action}, and they said {punchline}",
-                "{subject} {action} so much that {punchline}",
-                "My {subject} is {action} because {punchline}",
-                "I {action} my {subject} and now {punchline}",
-                "{subject} {action} better than {punchline}",
-                "I asked {subject} to {action}, but {punchline}",
-                "{subject} {action} while {punchline}"
+            // Long Conversation format
+            { type: 'conversation', templates: [
+                "{subject}: \"I need help with {action}.\"\n{punchline}: \"What's the problem?\"\n{subject}: \"I can't figure out how to {action}.\"\n{punchline}: \"That's easy! Here's what you do.\"\n{subject}: \"Really? Show me!\"\n{punchline}: \"First, you need to {action}.\"\n{subject}: \"Okay, I'm doing that.\"\n{punchline}: \"Good! Now {action}.\"\n{subject}: \"This is working!\"\n{punchline}: \"Perfect! You've got it now!\"",
+                
+                "A {subject} meets a {action} at {punchline}.\n{subject}: \"Hello! I'm here to {action}.\"\n{action}: \"Welcome! I can help you with that.\"\n{subject}: \"Great! What do I need to do?\"\n{action}: \"First, you need to {punchline}.\"\n{subject}: \"That sounds interesting!\"\n{action}: \"It is! And then you {action}.\"\n{subject}: \"This is amazing!\"\n{action}: \"I'm glad you like it!\"\n{subject}: \"Thank you for your help!\"\n{action}: \"You're very welcome!\""
             ]}
         ];
         
@@ -73,23 +60,19 @@ class AIJokeGenerator {
         ];
         
         this.punchlines = [
-            'it was a piece of cake', 'they were in a pickle', 'it was a real eye-opener',
-            'they were over the moon', 'it was a walk in the park', 'they were on cloud nine',
-            'it was a breath of fresh air', 'they were in hot water', 'it was a wild goose chase',
-            'they were under the weather', 'it was a drop in the bucket', 'they were on thin ice',
-            'it was a blessing in disguise', 'they were in the doghouse', 'it was a shot in the dark',
-            'they were on top of the world', 'it was a needle in a haystack', 'they were in the same boat',
-            'it was a diamond in the rough', 'they were on the same page', 'it was a wolf in sheep\'s clothing',
-            'they were in the driver\'s seat', 'it was a bird in the hand', 'they were on the ball',
-            'it was a chip off the old block', 'they were in the spotlight', 'it was a feather in their cap',
-            'they were on the right track', 'it was a taste of their own medicine', 'they were in the clear',
-            'it was a labor of love', 'they were on the fence', 'it was a matter of time',
-            'they were in the loop', 'it was a stroke of luck', 'they were on the same wavelength',
-            'it was a work of art', 'they were in the zone', 'it was a sight for sore eyes',
-            'they were on the edge of their seat', 'it was a breath of fresh air', 'they were in the groove',
-            'it was a ray of sunshine', 'they were on the up and up', 'it was a sign of the times',
-            'they were in the nick of time', 'it was a change of pace', 'they were on the level',
-            'it was a step in the right direction', 'they were in the fast lane', 'it was a turn of events'
+            'magic', 'pizza', 'coffee', 'chocolate', 'ice cream', 'cookies', 'cake', 'donuts',
+            'sandwich', 'burger', 'fries', 'popcorn', 'candy', 'gum', 'soda', 'juice',
+            'tea', 'milk', 'water', 'smoothie', 'shake', 'beer', 'wine', 'cocktail',
+            'music', 'dance', 'singing', 'painting', 'drawing', 'writing', 'reading', 'cooking',
+            'gardening', 'fishing', 'hiking', 'swimming', 'running', 'cycling', 'dancing', 'yoga',
+            'meditation', 'sleeping', 'dreaming', 'laughing', 'smiling', 'hugging', 'kissing', 'loving',
+            'friendship', 'family', 'happiness', 'joy', 'peace', 'harmony', 'balance', 'wisdom',
+            'knowledge', 'learning', 'teaching', 'helping', 'sharing', 'caring', 'giving', 'receiving',
+            'adventure', 'exploration', 'discovery', 'invention', 'creation', 'imagination', 'creativity', 'inspiration',
+            'motivation', 'determination', 'perseverance', 'patience', 'kindness', 'generosity', 'honesty', 'integrity',
+            'courage', 'bravery', 'strength', 'power', 'energy', 'vitality', 'health', 'wellness',
+            'success', 'achievement', 'victory', 'triumph', 'celebration', 'party', 'festival', 'holiday',
+            'vacation', 'travel', 'journey', 'trip', 'expedition', 'mission', 'quest', 'adventure'
         ];
         
         this.initializeApp();
@@ -290,9 +273,9 @@ class AIJokeGenerator {
     
     getJokeType(patternType) {
         const types = {
+            'story': 'Long Story',
             'qa': 'Question & Answer',
-            'statement': 'Story Joke',
-            'oneliner': 'One-Liner'
+            'conversation': 'Conversation'
         };
         return types[patternType] || 'AI Generated';
     }

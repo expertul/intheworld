@@ -271,7 +271,9 @@ main {
     border-radius: var(--border-radius-small);
     padding: 2rem;
     margin-bottom: 1.5rem;
-    min-height: 120px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,12 +286,14 @@ main {
 }
 
 #jokeText {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     line-height: 1.8;
     color: var(--text-primary);
     font-weight: 500;
-    text-align: center;
+    text-align: left;
     animation: fadeInUp 0.6s ease-out;
+    white-space: pre-line;
+    max-width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -329,56 +333,49 @@ main {
     margin: 2rem 0;
 }
 
-/* AI Button */
-.ai-button {
-    position: relative;
-    background: var(--accent-gradient);
-    border: none;
-    border-radius: 50px;
-    padding: 1.5rem 3rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
+/* Smiley Face Grid */
+.smiley-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.smiley-face {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--glass-border);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
     cursor: pointer;
     transition: var(--transition);
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
-    font-family: 'Inter', sans-serif;
-}
-
-.ai-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4);
-}
-
-.ai-button:active {
-    transform: translateY(-1px);
-}
-
-.ai-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.button-content {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: center;
     position: relative;
-    z-index: 2;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
 }
 
-.button-icon {
-    font-size: 1.5rem;
-    transition: var(--transition);
+.smiley-face:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: var(--shadow-heavy);
+    border-color: rgba(79, 172, 254, 0.5);
 }
 
-.ai-button:hover .button-icon {
-    transform: rotate(10deg) scale(1.1);
+.smiley-face:active {
+    transform: translateY(-2px) scale(1.05);
 }
 
-.button-glow {
+.smiley-face::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -389,8 +386,89 @@ main {
     transition: transform 0.6s ease;
 }
 
-.ai-button:hover .button-glow {
+.smiley-face:hover::before {
     transform: translateX(100%);
+}
+
+/* Special hover effects for different moods */
+.smiley-face[data-mood="happy"]:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+}
+
+.smiley-face[data-mood="laughing"]:hover {
+    background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(255, 105, 180, 0.2));
+}
+
+.smiley-face[data-mood="winking"]:hover {
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(30, 144, 255, 0.2));
+}
+
+.smiley-face[data-mood="grinning"]:hover {
+    background: linear-gradient(135deg, rgba(50, 205, 50, 0.2), rgba(34, 139, 34, 0.2));
+}
+
+.smiley-face[data-mood="joy"]:hover {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.2), rgba(255, 140, 0, 0.2));
+}
+
+.smiley-face[data-mood="cool"]:hover {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(75, 0, 130, 0.2));
+}
+
+.smiley-face[data-mood="love"]:hover {
+    background: linear-gradient(135deg, rgba(255, 192, 203, 0.3), rgba(255, 20, 147, 0.2));
+}
+
+.smiley-face[data-mood="thinking"]:hover {
+    background: linear-gradient(135deg, rgba(169, 169, 169, 0.2), rgba(128, 128, 128, 0.2));
+}
+
+.smiley-face[data-mood="surprised"]:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 0, 0.2), rgba(255, 215, 0, 0.2));
+}
+
+.smiley-face[data-mood="excited"]:hover {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.2), rgba(255, 165, 0, 0.2));
+}
+
+.smiley-face[data-mood="playful"]:hover {
+    background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 250, 154, 0.2));
+}
+
+.smiley-face[data-mood="silly"]:hover {
+    background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(255, 105, 180, 0.2));
+}
+
+.smiley-face[data-mood="cheerful"]:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 255, 0, 0.2));
+}
+
+.smiley-face[data-mood="mischievous"]:hover {
+    background: linear-gradient(135deg, rgba(139, 0, 139, 0.2), rgba(75, 0, 130, 0.2));
+}
+
+.smiley-face[data-mood="angelic"]:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(240, 248, 255, 0.2));
+}
+
+.smiley-face[data-mood="confused"]:hover {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 140, 0, 0.2));
+}
+
+.smiley-face[data-mood="relieved"]:hover {
+    background: linear-gradient(135deg, rgba(144, 238, 144, 0.2), rgba(152, 251, 152, 0.2));
+}
+
+.smiley-face[data-mood="sleepy"]:hover {
+    background: linear-gradient(135deg, rgba(176, 196, 222, 0.2), rgba(135, 206, 235, 0.2));
+}
+
+.smiley-face[data-mood="dizzy"]:hover {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 192, 203, 0.2));
+}
+
+.smiley-face[data-mood="party"]:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 20, 147, 0.2));
 }
 
 /* Loading Indicator */
@@ -632,9 +710,16 @@ footer {
         padding: 2rem 1.5rem;
     }
     
-    .ai-button {
-        padding: 1.25rem 2.5rem;
-        font-size: 1rem;
+    .smiley-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        padding: 1.5rem;
+    }
+    
+    .smiley-face {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
     }
     
     .stats-container {
@@ -666,13 +751,16 @@ footer {
         font-size: 1.2rem;
     }
     
-    .ai-button {
-        padding: 1rem 2rem;
-        font-size: 0.95rem;
+    .smiley-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 1rem;
     }
     
-    .button-content {
-        gap: 0.5rem;
+    .smiley-face {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
     
     .features {

@@ -79,7 +79,7 @@
         <div class="joke-container">
             <div class="joke-display" id="jokeDisplay">
                 <div class="joke-content">
-                    <p id="jokeText">Welcome! Click the AI button below to get your first AI-generated joke! 🤖</p>
+                    <p id="jokeText">Welcome! Click any smiley face below to get your first AI-generated joke! 😊</p>
                 </div>
                 <div class="joke-meta">
                     <span class="joke-id" id="jokeId">#0000</span>
@@ -87,23 +87,37 @@
                 </div>
             </div>
             
-            <div class="button-container">
-                <button class="ai-button" id="aiButton" onclick="generateAIJoke()">
-                    <div class="button-content">
-                        <span class="button-icon">🤖</span>
-                        <span class="button-text">Generate AI Joke</span>
-                    </div>
-                    <div class="button-glow"></div>
-                </button>
-                
-                <div class="loading-indicator" id="loadingIndicator">
-                    <div class="loading-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <p>AI is crafting your joke...</p>
+            <!-- 20 Smiley Faces Grid -->
+            <div class="smiley-grid">
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy">😊</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing">😂</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking">😉</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="grinning">😄</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="joy">🤣</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool">😎</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="love">🥰</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking">🤔</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised">😮</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="excited">🤩</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="playful">😜</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly">🤪</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="cheerful">😃</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="mischievous">😈</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="angelic">😇</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused">😕</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="relieved">😌</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="sleepy">😴</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="dizzy">🥴</button>
+                <button class="smiley-face" onclick="generateAIJoke()" data-mood="party">🎉</button>
+            </div>
+            
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
+                <p>AI is crafting your joke...</p>
             </div>
             
             <div class="stats-container">
