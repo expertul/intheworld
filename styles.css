@@ -162,10 +162,40 @@ main {
     box-shadow: var(--shadow-light);
     text-align: center;
     transition: var(--transition);
+    position: relative;
 }
 
 .ad-container:hover {
     transform: translateY(-2px);
+}
+
+/* Above the Fold Ad - Highest Revenue */
+.above-fold-ad {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 2px solid rgba(79, 172, 254, 0.3);
+    margin: 1rem 0 2rem 0;
+}
+
+/* In-Content Ad - Between Sections */
+.in-content-ad {
+    background: linear-gradient(135deg, rgba(255, 119, 198, 0.1) 0%, rgba(79, 172, 254, 0.1) 100%);
+    border: 1px solid rgba(255, 119, 198, 0.2);
+    margin: 2rem 0;
+}
+
+/* Ad Labels */
+.ad-label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Sidebar Ad */
@@ -184,6 +214,17 @@ main {
 
 .sidebar-ad:hover {
     transform: translateY(-2px);
+}
+
+/* Desktop Only */
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .desktop-only {
+        display: none;
+    }
 }
 
 /* Joke Container */
@@ -662,6 +703,82 @@ footer {
     }
 }
 
+/* Social Sharing & User Retention */
+.engagement-container {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-small);
+}
+
+.share-buttons, .retention-features {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.share-btn, .retention-btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.share-btn:hover, .retention-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
+}
+
+.share-btn.facebook:hover {
+    background: linear-gradient(135deg, #1877f2, #42a5f5);
+    border-color: #1877f2;
+}
+
+.share-btn.twitter:hover {
+    background: linear-gradient(135deg, #1da1f2, #42a5f5);
+    border-color: #1da1f2;
+}
+
+.share-btn.whatsapp:hover {
+    background: linear-gradient(135deg, #25d366, #42a5f5);
+    border-color: #25d366;
+}
+
+.retention-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 119, 198, 0.2), rgba(79, 172, 254, 0.2));
+    border-color: rgba(255, 119, 198, 0.3);
+}
+
+/* Performance Optimizations */
+.performance-optimized {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Lazy Loading for Images */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
 /* Print styles */
 @media print {
     body {
@@ -670,7 +787,8 @@ footer {
     }
     
     .ad-container,
-    .sidebar-ad {
+    .sidebar-ad,
+    .engagement-container {
         display: none;
     }
 }

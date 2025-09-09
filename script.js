@@ -411,6 +411,131 @@ window.addEventListener('load', function() {
     }
 });
 
+// Social Sharing Functions
+function shareToFacebook() {
+    const currentJoke = document.getElementById('jokeText').textContent;
+    const jokeId = document.getElementById('jokeId').textContent;
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`${currentJoke} - ${jokeId}`)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+    
+    if (window.aiJokeGenerator) {
+        window.aiJokeGenerator.trackEvent('social_share', { platform: 'facebook' });
+    }
+}
+
+function shareToTwitter() {
+    const currentJoke = document.getElementById('jokeText').textContent;
+    const jokeId = document.getElementById('jokeId').textContent;
+    const shareText = `${currentJoke} - ${jokeId} via @AdSenseWeb`;
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+    
+    if (window.aiJokeGenerator) {
+        window.aiJokeGenerator.trackEvent('social_share', { platform: 'twitter' });
+    }
+}
+
+function shareToWhatsApp() {
+    const currentJoke = document.getElementById('jokeText').textContent;
+    const jokeId = document.getElementById('jokeId').textContent;
+    const shareText = `${currentJoke} - ${jokeId}\n\nCheck out AdSense Web for more jokes!`;
+    const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    window.open(shareUrl, '_blank');
+    
+    if (window.aiJokeGenerator) {
+        window.aiJokeGenerator.trackEvent('social_share', { platform: 'whatsapp' });
+    }
+}
+
+// User Retention Functions
+function saveFavoriteJoke() {
+    const currentJoke = document.getElementById('jokeText').textContent;
+    const jokeId = document.getElementById('jokeId').textContent;
+    
+    const favorites = JSON.parse(localStorage.getItem('favoriteJokes') || '[]');
+    const favorite = {
+        id: jokeId,
+        text: currentJoke,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Check if already favorited
+    if (!favorites.find(fav => fav.id === jokeId)) {
+        favorites.push(favorite);
+        localStorage.setItem('favoriteJokes', JSON.stringify(favorites));
+        
+        if (window.aiJokeGenerator) {
+            window.aiJokeGenerator.showNotification('Joke saved to favorites! ❤️');
+            window.aiJokeGenerator.trackEvent('favorite_saved', { joke_id: jokeId });
+        }
+    } else {
+        if (window.aiJokeGenerator) {
+            window.aiJokeGenerator.showNotification('Already in favorites! ❤️');
+        }
+    }
+}
+
+function getDailyJoke() {
+    // Generate a special daily joke
+    if (window.aiJokeGenerator) {
+        window.aiJokeGenerator.generateAIJoke();
+        window.aiJokeGenerator.trackEvent('daily_joke_requested', {});
+    }
+}
+
+function subscribeNewsletter() {
+    const email = prompt('Enter your email to get daily jokes and updates:');
+    if (email && email.includes('@')) {
+        const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+        if (!subscribers.includes(email)) {
+            subscribers.push(email);
+            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+            
+            if (window.aiJokeGenerator) {
+                window.aiJokeGenerator.showNotification('Thanks for subscribing! 📧');
+                window.aiJokeGenerator.trackEvent('newsletter_subscribed', { email: email });
+            }
+        } else {
+            if (window.aiJokeGenerator) {
+                window.aiJokeGenerator.showNotification('Already subscribed! 📧');
+            }
+        }
+    }
+}
+
+// Performance Optimization
+function optimizePerformance() {
+    // Lazy load images
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy-load');
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+    
+    // Preload critical resources
+    const criticalResources = [
+        'styles.css',
+        'script.js'
+    ];
+    
+    criticalResources.forEach(resource => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = resource;
+        link.as = resource.endsWith('.css') ? 'style' : 'script';
+        document.head.appendChild(link);
+    });
+}
+
 // Service Worker for offline functionality
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -423,3 +548,8 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Initialize performance optimizations
+document.addEventListener('DOMContentLoaded', function() {
+    optimizePerformance();
+});
