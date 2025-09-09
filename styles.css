@@ -127,13 +127,13 @@ header p {
 
 /* Main Layout */
 main {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
-    display: grid;
-    grid-template-columns: 1fr 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
-    align-items: start;
 }
 
 /* Glassmorphism Card */
@@ -158,11 +158,13 @@ main {
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
     padding: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
     box-shadow: var(--shadow-light);
     text-align: center;
     transition: var(--transition);
     position: relative;
+    width: 100%;
+    max-width: 800px;
 }
 
 .ad-container:hover {
@@ -198,34 +200,7 @@ main {
     letter-spacing: 0.5px;
 }
 
-/* Sidebar Ad */
-.sidebar-ad {
-    position: sticky;
-    top: 2rem;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-light);
-    text-align: center;
-    transition: var(--transition);
-}
-
-.sidebar-ad:hover {
-    transform: translateY(-2px);
-}
-
-/* Desktop Only */
-.desktop-only {
-    display: block;
-}
-
-@media (max-width: 1024px) {
-    .desktop-only {
-        display: none;
-    }
-}
+/* Removed sidebar ad styles - using centered layout instead */
 
 /* Joke Container */
 .joke-container {
@@ -236,10 +211,12 @@ main {
     padding: 3rem 2rem;
     text-align: center;
     box-shadow: var(--shadow-light);
-    margin: 2rem 0;
+    margin: 0;
     position: relative;
     overflow: hidden;
     transition: var(--transition);
+    width: 100%;
+    max-width: 1000px;
 }
 
 .joke-container::before {
@@ -338,12 +315,15 @@ main {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 600px;
+    justify-items: center;
 }
 
 .smiley-face {
@@ -526,7 +506,9 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin: 2rem auto 0;
+    width: 100%;
+    max-width: 600px;
 }
 
 .stat-item {
@@ -566,9 +548,11 @@ main {
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
     padding: 3rem 2rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
     box-shadow: var(--shadow-light);
     transition: var(--transition);
+    width: 100%;
+    max-width: 1000px;
 }
 
 .features:hover {
@@ -687,13 +671,15 @@ footer {
 /* Responsive Design */
 @media (max-width: 1024px) {
     main {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        padding: 1.5rem 1rem;
     }
     
-    .sidebar-ad {
-        position: static;
-        order: -1;
+    .joke-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .smiley-grid {
+        max-width: 500px;
     }
 }
 
@@ -706,6 +692,10 @@ footer {
         font-size: 2.5rem;
     }
     
+    main {
+        padding: 1rem;
+    }
+    
     .joke-container {
         padding: 2rem 1.5rem;
     }
@@ -714,6 +704,7 @@ footer {
         grid-template-columns: repeat(4, 1fr);
         gap: 0.75rem;
         padding: 1.5rem;
+        max-width: 400px;
     }
     
     .smiley-face {
@@ -725,6 +716,11 @@ footer {
     .stats-container {
         grid-template-columns: 1fr;
         gap: 1rem;
+        max-width: 400px;
+    }
+    
+    .engagement-container {
+        max-width: 400px;
     }
     
     .feature-grid {
@@ -743,6 +739,10 @@ footer {
         font-size: 2rem;
     }
     
+    main {
+        padding: 0.5rem;
+    }
+    
     .joke-container {
         padding: 1.5rem 1rem;
     }
@@ -755,12 +755,22 @@ footer {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
         padding: 1rem;
+        max-width: 300px;
     }
     
     .smiley-face {
         width: 50px;
         height: 50px;
         font-size: 1.5rem;
+    }
+    
+    .stats-container {
+        max-width: 300px;
+    }
+    
+    .engagement-container {
+        max-width: 300px;
+        padding: 1rem;
     }
     
     .features {
@@ -793,12 +803,14 @@ footer {
 
 /* Social Sharing & User Retention */
 .engagement-container {
-    margin-top: 2rem;
+    margin: 2rem auto 0;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-small);
+    width: 100%;
+    max-width: 600px;
 }
 
 .share-buttons, .retention-features {
