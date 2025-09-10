@@ -394,6 +394,16 @@ document.addEventListener('DOMContentLoaded', function() {
 function generateAIJoke() {
     console.log('generateAIJoke called from button click');
     console.log('aiJokeGenerator exists:', !!window.aiJokeGenerator);
+    
+    // Simple test - directly update the joke text
+    const jokeText = document.getElementById('jokeText');
+    if (jokeText) {
+        console.log('Found jokeText element, updating directly...');
+        jokeText.textContent = 'Test joke: Why did the chicken cross the road? To get to the other side!';
+    } else {
+        console.error('jokeText element not found!');
+    }
+    
     if (window.aiJokeGenerator) {
         window.aiJokeGenerator.generateAIJoke();
     } else {
