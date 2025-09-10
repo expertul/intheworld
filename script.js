@@ -113,15 +113,11 @@ class AIJokeGenerator {
     }
     
     setupEventListeners() {
-        const aiButton = document.getElementById('aiButton');
-        
         // Keyboard support
         document.addEventListener('keydown', (event) => {
             if (event.code === 'Space' || event.code === 'Enter') {
                 event.preventDefault();
-                if (!aiButton.disabled) {
-                    this.generateAIJoke();
-                }
+                this.generateAIJoke();
             }
         });
         
@@ -146,23 +142,18 @@ class AIJokeGenerator {
         if (Math.abs(diff) > swipeThreshold) {
             if (diff > 0) {
                 // Swipe up - generate new joke
-                const aiButton = document.getElementById('aiButton');
-                if (!aiButton.disabled) {
-                    this.generateAIJoke();
-                }
+                this.generateAIJoke();
             }
         }
     }
     
     generateAIJoke() {
-        const aiButton = document.getElementById('aiButton');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const jokeText = document.getElementById('jokeText');
         const jokeId = document.getElementById('jokeId');
         const jokeType = document.getElementById('jokeType');
         
         // Show loading state
-        aiButton.style.opacity = '0';
         loadingIndicator.classList.add('active');
         
         // Simulate AI processing time
@@ -191,8 +182,7 @@ class AIJokeGenerator {
                 this.saveData();
                 this.trackEngagement(joke);
                 
-                // Reset button
-                aiButton.style.opacity = '1';
+                // Hide loading indicator
                 loadingIndicator.classList.remove('active');
                 
             }, 300);
@@ -331,6 +321,38 @@ class AIJokeGenerator {
         if (typeof fbq !== 'undefined') {
             fbq('track', eventName, eventData);
         }
+    }
+    
+    showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 0.9rem;
+            font-weight: 500;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-in';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
     }
     
     preloadJokes() {
