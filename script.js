@@ -148,35 +148,44 @@ class AIJokeGenerator {
     }
     
     generateAIJoke() {
-        console.log('generateAIJoke called');
+        console.log('AIJokeGenerator.generateAIJoke() called');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const jokeText = document.getElementById('jokeText');
         const jokeId = document.getElementById('jokeId');
         const jokeType = document.getElementById('jokeType');
         
-        console.log('Elements found:', { loadingIndicator, jokeText, jokeId, jokeType });
+        console.log('Elements found:', {
+            loadingIndicator: !!loadingIndicator,
+            jokeText: !!jokeText,
+            jokeId: !!jokeId,
+            jokeType: !!jokeType
+        });
         
         // Show loading state
-        loadingIndicator.classList.add('active');
+        if (loadingIndicator) loadingIndicator.classList.add('active');
         
         // Simulate AI processing time
         setTimeout(() => {
-            console.log('Creating unique joke...');
+            console.log('Creating joke...');
             const joke = this.createUniqueJoke();
             console.log('Joke created:', joke);
             
             // Update display with animation
-            jokeText.style.opacity = '0';
-            jokeText.style.transform = 'translateY(20px)';
+            if (jokeText) {
+                jokeText.style.opacity = '0';
+                jokeText.style.transform = 'translateY(20px)';
+            }
             
             setTimeout(() => {
-                console.log('Updating display with joke:', joke.text);
-                jokeText.textContent = joke.text;
-                jokeId.textContent = `#${joke.id.toString().padStart(4, '0')}`;
-                jokeType.textContent = joke.type;
+                console.log('Updating display with joke text:', joke.text);
+                if (jokeText) jokeText.textContent = joke.text;
+                if (jokeId) jokeId.textContent = `#${joke.id.toString().padStart(4, '0')}`;
+                if (jokeType) jokeType.textContent = joke.type;
                 
-                jokeText.style.opacity = '1';
-                jokeText.style.transform = 'translateY(0)';
+                if (jokeText) {
+                    jokeText.style.opacity = '1';
+                    jokeText.style.transform = 'translateY(0)';
+                }
                 
                 // Update counters
                 this.totalJokes++;
@@ -189,7 +198,7 @@ class AIJokeGenerator {
                 this.trackEngagement(joke);
                 
                 // Hide loading indicator
-                loadingIndicator.classList.remove('active');
+                if (loadingIndicator) loadingIndicator.classList.remove('active');
                 
             }, 300);
             
@@ -376,17 +385,25 @@ class AIJokeGenerator {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing AIJokeGenerator...');
     window.aiJokeGenerator = new AIJokeGenerator();
+    console.log('AIJokeGenerator initialized:', window.aiJokeGenerator);
 });
 
 // Global function for button onclick
 function generateAIJoke() {
-    console.log('Global generateAIJoke called');
+    console.log('generateAIJoke called from button click');
     console.log('aiJokeGenerator exists:', !!window.aiJokeGenerator);
     if (window.aiJokeGenerator) {
         window.aiJokeGenerator.generateAIJoke();
     } else {
         console.error('aiJokeGenerator not found!');
+        // Try to initialize again
+        console.log('Attempting to initialize AIJokeGenerator...');
+        window.aiJokeGenerator = new AIJokeGenerator();
+        if (window.aiJokeGenerator) {
+            window.aiJokeGenerator.generateAIJoke();
+        }
     }
 }
 
