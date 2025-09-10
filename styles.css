@@ -65,7 +65,7 @@ body::before {
 
 /* Header Styles */
 header {
-    padding: 3rem 1rem 2rem;
+    padding: 1.5rem 1rem 1rem;
     text-align: center;
     position: relative;
 }
@@ -76,21 +76,21 @@ header {
 }
 
 header h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     letter-spacing: -0.02em;
 }
 
 header p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     font-weight: 400;
 }
 
@@ -98,18 +98,18 @@ header p {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50px;
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-primary);
     box-shadow: var(--shadow-light);
     transition: var(--transition);
-    min-width: 280px;
+    min-width: 250px;
 }
 
 .ai-badge:hover {
@@ -123,13 +123,13 @@ header p {
 }
 
 .ai-message {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     text-align: center;
     font-weight: 400;
     opacity: 0.9;
     animation: fadeInOut 3s ease-in-out infinite;
-    margin-top: 0.25rem;
+    margin-top: 0.1rem;
 }
 
 @keyframes fadeInOut {
@@ -152,13 +152,13 @@ header p {
 main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1rem;
 }
 
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
     align-items: start;
 }
 
@@ -234,10 +234,10 @@ main {
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: var(--shadow-light);
     position: sticky;
-    top: 2rem;
+    top: 1rem;
     height: fit-content;
 }
 
@@ -259,7 +259,7 @@ main {
 
 /* Joke Display */
 .joke-display {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     position: relative;
 }
 
@@ -268,10 +268,10 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-small);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    min-height: 300px;
-    max-height: 500px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 200px;
+    max-height: 350px;
     overflow-y: auto;
     display: flex;
     align-items: flex-start;
@@ -285,8 +285,8 @@ main {
 }
 
 #jokeText {
-    font-size: 1.3rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--text-primary);
     font-weight: 500;
     text-align: left;
@@ -338,15 +338,15 @@ main {
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: var(--shadow-light);
 }
 
 .smiley-section h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
@@ -355,9 +355,9 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    gap: 0.75rem;
-    margin: 2rem 0;
-    padding: 1.5rem;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -371,9 +371,9 @@ main {
     backdrop-filter: blur(20px);
     border: 2px solid var(--glass-border);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -544,11 +544,11 @@ main {
 /* Stats Container */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem auto 0;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1rem auto 0;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .stat-item {
@@ -556,7 +556,7 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-small);
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
     transition: var(--transition);
 }
@@ -568,15 +568,15 @@ main {
 
 .stat-number {
     display: block;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     font-family: 'JetBrains Mono', monospace;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 500;
 }
@@ -588,8 +588,8 @@ footer {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--glass-border);
-    padding: 2rem;
-    margin-top: 3rem;
+    padding: 1rem;
+    margin-top: 1rem;
     text-align: center;
 }
 

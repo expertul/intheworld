@@ -229,6 +229,9 @@ class AIJokeGenerator {
         // Add some AI creativity with variations
         jokeText = this.addAICreativity(jokeText);
         
+        // Fix quote formatting - replace "text" with text:
+        jokeText = jokeText.replace(/"([^"]+)"/g, '$1:');
+        
         return {
             id: this.currentJokeId + 1,
             text: jokeText,
