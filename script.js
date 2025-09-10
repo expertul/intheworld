@@ -148,27 +148,17 @@ class AIJokeGenerator {
     }
     
     generateAIJoke() {
-        console.log('AIJokeGenerator.generateAIJoke() called');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const jokeText = document.getElementById('jokeText');
         const jokeId = document.getElementById('jokeId');
         const jokeType = document.getElementById('jokeType');
-        
-        console.log('Elements found:', {
-            loadingIndicator: !!loadingIndicator,
-            jokeText: !!jokeText,
-            jokeId: !!jokeId,
-            jokeType: !!jokeType
-        });
         
         // Show loading state
         if (loadingIndicator) loadingIndicator.classList.add('active');
         
         // Simulate AI processing time
         setTimeout(() => {
-            console.log('Creating joke...');
             const joke = this.createUniqueJoke();
-            console.log('Joke created:', joke);
             
             // Update display with animation
             if (jokeText) {
@@ -177,7 +167,6 @@ class AIJokeGenerator {
             }
             
             setTimeout(() => {
-                console.log('Updating display with joke text:', joke.text);
                 if (jokeText) jokeText.textContent = joke.text;
                 if (jokeId) jokeId.textContent = `#${joke.id.toString().padStart(4, '0')}`;
                 if (jokeType) jokeType.textContent = joke.type;
@@ -385,31 +374,16 @@ class AIJokeGenerator {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing AIJokeGenerator...');
     window.aiJokeGenerator = new AIJokeGenerator();
-    console.log('AIJokeGenerator initialized:', window.aiJokeGenerator);
 });
 
 // Global function for button onclick
 function generateAIJoke() {
-    console.log('generateAIJoke called from button click');
-    console.log('aiJokeGenerator exists:', !!window.aiJokeGenerator);
-    
-    // Simple test - directly update the joke text
-    const jokeText = document.getElementById('jokeText');
-    if (jokeText) {
-        console.log('Found jokeText element, updating directly...');
-        jokeText.textContent = 'Test joke: Why did the chicken cross the road? To get to the other side!';
-    } else {
-        console.error('jokeText element not found!');
-    }
-    
     if (window.aiJokeGenerator) {
         window.aiJokeGenerator.generateAIJoke();
     } else {
         console.error('aiJokeGenerator not found!');
         // Try to initialize again
-        console.log('Attempting to initialize AIJokeGenerator...');
         window.aiJokeGenerator = new AIJokeGenerator();
         if (window.aiJokeGenerator) {
             window.aiJokeGenerator.generateAIJoke();
