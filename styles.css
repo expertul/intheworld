@@ -65,7 +65,7 @@ body::before {
 
 /* Header Styles */
 header {
-    padding: 0.8rem 1rem 0.5rem;
+    padding: 0.3rem 1rem 0.2rem;
     text-align: center;
     position: relative;
 }
@@ -163,8 +163,8 @@ header p {
 main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0.5rem;
-    min-height: calc(100vh - 200px);
+    padding: 0.2rem;
+    min-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -173,8 +173,8 @@ main {
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
+    gap: 1rem;
+    align-items: stretch;
     flex: 1;
 }
 
@@ -254,7 +254,9 @@ main {
     box-shadow: var(--shadow-light);
     position: sticky;
     top: 0.5rem;
-    height: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .joke-section::before {
@@ -275,8 +277,11 @@ main {
 
 /* Joke Display */
 .joke-display {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .joke-content {
@@ -286,8 +291,7 @@ main {
     border-radius: var(--border-radius-small);
     padding: 0.8rem;
     margin-bottom: 0.5rem;
-    min-height: 150px;
-    max-height: 250px;
+    flex: 1;
     overflow-y: auto;
     display: flex;
     align-items: flex-start;
@@ -356,6 +360,9 @@ main {
     border-radius: var(--border-radius);
     padding: 0.5rem;
     box-shadow: var(--shadow-light);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .smiley-section h2 {
@@ -380,6 +387,7 @@ main {
     border-radius: var(--border-radius);
     justify-items: center;
     align-items: center;
+    flex: 1;
 }
 
 .smiley-face {
