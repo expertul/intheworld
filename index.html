@@ -65,150 +65,90 @@
     </header>
 
     <main>
-        <!-- Above the Fold Ad - Highest Revenue Position -->
-        <div class="ad-container above-fold-ad">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                 data-ad-slot="YOUR_ABOVE_FOLD_SLOT_ID"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-
-        <div class="joke-container">
-            <div class="joke-display" id="jokeDisplay">
-                <div class="joke-content">
-                    <p id="jokeText">Welcome! Click any smiley face below to get your first AI-generated joke! 😊</p>
-                </div>
-                <div class="joke-meta">
-                    <span class="joke-id" id="jokeId">#0000</span>
-                    <span class="joke-type" id="jokeType">AI Generated</span>
-                </div>
-            </div>
-            
-            <!-- 20 Smiley Faces Grid -->
-            <div class="smiley-grid">
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy">😊</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing">😂</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking">😉</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="grinning">😄</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="joy">🤣</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool">😎</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="love">🥰</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking">🤔</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised">😮</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="excited">🤩</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="playful">😜</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly">🤪</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="cheerful">😃</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="mischievous">😈</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="angelic">😇</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused">😕</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="relieved">😌</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="sleepy">😴</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="dizzy">🥴</button>
-                <button class="smiley-face" onclick="generateAIJoke()" data-mood="party">🎉</button>
-            </div>
-            
-            <div class="loading-indicator" id="loadingIndicator">
-                <div class="loading-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <p>AI is crafting your joke...</p>
-            </div>
-            
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="stat-number" id="jokeCount">0</span>
-                    <span class="stat-label">Jokes Generated</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="uniqueCount">0</span>
-                    <span class="stat-label">Unique Jokes</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="sessionCount">0</span>
-                    <span class="stat-label">This Session</span>
-                </div>
-            </div>
-            
-            <!-- Social Sharing & User Retention -->
-            <div class="engagement-container">
-                <div class="share-buttons">
-                    <button class="share-btn facebook" onclick="shareToFacebook()">
-                        <span>📘</span> Share
-                    </button>
-                    <button class="share-btn twitter" onclick="shareToTwitter()">
-                        <span>🐦</span> Tweet
-                    </button>
-                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()">
-                        <span>💬</span> WhatsApp
-                    </button>
+        <div class="main-content">
+            <!-- Smiley Faces Grid (Left Side) -->
+            <div class="smiley-section">
+                <h2>Click any smiley face to generate a joke!</h2>
+                <div class="smiley-grid">
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy">😊</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing">😂</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking">😉</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="grinning">😄</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="joy">🤣</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool">😎</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="love">🥰</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking">🤔</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised">😮</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="excited">🤩</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="playful">😜</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly">🤪</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cheerful">😃</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="mischievous">😈</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="angelic">😇</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused">😕</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="relieved">😌</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="sleepy">😴</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="dizzy">🥴</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="party">🎉</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy2">😊</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing2">😂</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking2">😉</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="grinning2">😄</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="joy2">🤣</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool2">😎</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="love2">🥰</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking2">🤔</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised2">😮</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="excited2">🤩</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="playful2">😜</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly2">🤪</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cheerful2">😃</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="mischievous2">😈</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="angelic2">😇</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused2">😕</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="relieved2">😌</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="sleepy2">😴</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="dizzy2">🥴</button>
+                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="party2">🎉</button>
                 </div>
                 
-                <div class="retention-features">
-                    <button class="retention-btn" onclick="saveFavoriteJoke()">
-                        <span>❤️</span> Save Favorite
-                    </button>
-                    <button class="retention-btn" onclick="getDailyJoke()">
-                        <span>📅</span> Daily Joke
-                    </button>
-                    <button class="retention-btn" onclick="subscribeNewsletter()">
-                        <span>📧</span> Get Updates
-                    </button>
+                <div class="loading-indicator" id="loadingIndicator">
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <p>AI is crafting your joke...</p>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number" id="jokeCount">0</span>
+                        <span class="stat-label">Jokes Generated</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="uniqueCount">0</span>
+                        <span class="stat-label">Unique Jokes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="sessionCount">0</span>
+                        <span class="stat-label">This Session</span>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- In-Content Ad Unit - Between Content Sections -->
-        <div class="ad-container in-content-ad">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                 data-ad-slot="YOUR_IN_CONTENT_SLOT_ID"
-                 data-ad-format="fluid"
-                 data-layout-key="-6t+ed+2i-1n-4w"></ins>
-        </div>
-
-        <div class="features">
-            <h2>Why AdSense Web?</h2>
-            <div class="feature-grid">
-                <div class="feature">
-                    <div class="feature-icon">🤖</div>
-                    <h3>Unlimited AI Jokes</h3>
-                    <p>Never-ending supply of unique, AI-generated jokes</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Instant Generation</h3>
-                    <p>Get fresh jokes instantly with advanced AI technology</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Perfect Length</h3>
-                    <p>Medium-length jokes that are just right - not too short, not too long</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🔄</div>
-                    <h3>No Repeats</h3>
-                    <p>Advanced tracking ensures you never see the same joke twice</p>
+            
+            <!-- Joke Display (Right Side) -->
+            <div class="joke-section">
+                <div class="joke-display" id="jokeDisplay">
+                    <div class="joke-content">
+                        <p id="jokeText">Welcome! Click any smiley face to get your first AI-generated joke! 😊</p>
+                    </div>
+                    <div class="joke-meta">
+                        <span class="joke-id" id="jokeId">#0000</span>
+                        <span class="joke-type" id="jokeType">AI Generated</span>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Bottom Ad Unit -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                 data-ad-slot="YOUR_BOTTOM_SLOT_ID"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
         </div>
     </main>
 

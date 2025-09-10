@@ -127,13 +127,16 @@ header p {
 
 /* Main Layout */
 main {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
 }
 
 /* Glassmorphism Card */
@@ -202,24 +205,20 @@ main {
 
 /* Removed sidebar ad styles - using centered layout instead */
 
-/* Joke Container */
-.joke-container {
+/* Joke Section */
+.joke-section {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
-    padding: 3rem 2rem;
-    text-align: center;
+    padding: 2rem;
     box-shadow: var(--shadow-light);
-    margin: 0;
-    position: relative;
-    overflow: hidden;
-    transition: var(--transition);
-    width: 100%;
-    max-width: 1000px;
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
 }
 
-.joke-container::before {
+.joke-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -230,14 +229,14 @@ main {
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
-.joke-container:hover {
+.joke-section:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-heavy);
 }
 
 /* Joke Display */
 .joke-display {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 
@@ -248,11 +247,11 @@ main {
     border-radius: var(--border-radius-small);
     padding: 2rem;
     margin-bottom: 1.5rem;
-    min-height: 200px;
-    max-height: 400px;
+    min-height: 300px;
+    max-height: 500px;
     overflow-y: auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     transition: var(--transition);
 }
@@ -310,20 +309,38 @@ main {
     margin: 2rem 0;
 }
 
-/* Smiley Face Grid */
+/* Smiley Section */
+.smiley-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+}
+
+.smiley-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Smiley Face Grid - 4x10 Layout */
 .smiley-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    margin: 2rem auto;
-    padding: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
-    width: 100%;
-    max-width: 600px;
     justify-items: center;
+    align-items: center;
 }
 
 .smiley-face {
@@ -331,9 +348,9 @@ main {
     backdrop-filter: blur(20px);
     border: 2px solid var(--glass-border);
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -541,101 +558,7 @@ main {
     font-weight: 500;
 }
 
-/* Features Section */
-.features {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 3rem 2rem;
-    margin: 2rem auto;
-    box-shadow: var(--shadow-light);
-    transition: var(--transition);
-    width: 100%;
-    max-width: 1000px;
-}
-
-.features:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-heavy);
-}
-
-.features h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--text-primary);
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.feature {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-small);
-    padding: 2rem;
-    text-align: center;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.feature::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--secondary-gradient);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.feature:hover::before {
-    transform: scaleX(1);
-}
-
-.feature:hover {
-    transform: translateY(-8px);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-.feature h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.feature p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    font-weight: 400;
-}
+/* Removed features section styles - no longer needed */
 
 /* Footer */
 footer {
@@ -674,12 +597,19 @@ footer {
         padding: 1.5rem 1rem;
     }
     
-    .joke-container {
-        padding: 2rem 1.5rem;
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .joke-section {
+        position: static;
+        order: -1;
     }
     
     .smiley-grid {
-        max-width: 500px;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(8, 1fr);
     }
 }
 
@@ -696,36 +626,22 @@ footer {
         padding: 1rem;
     }
     
-    .joke-container {
-        padding: 2rem 1.5rem;
-    }
-    
     .smiley-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 0.75rem;
-        padding: 1.5rem;
-        max-width: 400px;
+        grid-template-rows: repeat(10, 1fr);
+        gap: 0.5rem;
+        padding: 1rem;
     }
     
     .smiley-face {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
     
     .stats-container {
         grid-template-columns: 1fr;
         gap: 1rem;
-        max-width: 400px;
-    }
-    
-    .engagement-container {
-        max-width: 400px;
-    }
-    
-    .feature-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
     
     .footer-stats {
@@ -743,42 +659,26 @@ footer {
         padding: 0.5rem;
     }
     
-    .joke-container {
-        padding: 1.5rem 1rem;
-    }
-    
     #jokeText {
         font-size: 1.2rem;
     }
     
     .smiley-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        padding: 1rem;
-        max-width: 300px;
+        grid-template-rows: repeat(14, 1fr);
+        gap: 0.4rem;
+        padding: 0.8rem;
     }
     
     .smiley-face {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
     
     .stats-container {
-        max-width: 300px;
-    }
-    
-    .engagement-container {
-        max-width: 300px;
-        padding: 1rem;
-    }
-    
-    .features {
-        padding: 2rem 1rem;
-    }
-    
-    .features h2 {
-        font-size: 2rem;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
     }
 }
 
@@ -801,66 +701,7 @@ footer {
     }
 }
 
-/* Social Sharing & User Retention */
-.engagement-container {
-    margin: 2rem auto 0;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-small);
-    width: 100%;
-    max-width: 600px;
-}
-
-.share-buttons, .retention-features {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.share-btn, .retention-btn {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
-    padding: 0.75rem 1.5rem;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.share-btn:hover, .retention-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-light);
-}
-
-.share-btn.facebook:hover {
-    background: linear-gradient(135deg, #1877f2, #42a5f5);
-    border-color: #1877f2;
-}
-
-.share-btn.twitter:hover {
-    background: linear-gradient(135deg, #1da1f2, #42a5f5);
-    border-color: #1da1f2;
-}
-
-.share-btn.whatsapp:hover {
-    background: linear-gradient(135deg, #25d366, #42a5f5);
-    border-color: #25d366;
-}
-
-.retention-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 119, 198, 0.2), rgba(79, 172, 254, 0.2));
-    border-color: rgba(255, 119, 198, 0.3);
-}
+/* Removed social sharing styles - no longer needed */
 
 /* Performance Optimizations */
 .performance-optimized {
