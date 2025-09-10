@@ -382,7 +382,6 @@ function generateAIJoke() {
     if (window.aiJokeGenerator) {
         window.aiJokeGenerator.generateAIJoke();
     } else {
-        console.error('aiJokeGenerator not found!');
         // Try to initialize again
         window.aiJokeGenerator = new AIJokeGenerator();
         if (window.aiJokeGenerator) {
