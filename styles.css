@@ -373,14 +373,14 @@ main {
     font-weight: 600;
 }
 
-/* Smiley Face Grid - 5x12 Layout */
+/* Smiley Face Grid - 6x15 Layout */
 .smiley-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    gap: 0.05rem;
-    margin: 0.05rem 0;
-    padding: 0.1rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    gap: 0.1rem;
+    margin: 0.1rem 0;
+    padding: 0.2rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -395,9 +395,9 @@ main {
     backdrop-filter: blur(20px);
     border: 2px solid var(--glass-border);
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -694,10 +694,10 @@ footer {
     }
     
     .smiley-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(15, 1fr);
-        gap: 0.05rem;
-        padding: 0.1rem;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(18, 1fr);
+        gap: 0.1rem;
+        padding: 0.2rem;
     }
 }
 
@@ -715,16 +715,16 @@ footer {
     }
     
     .smiley-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(20, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(23, 1fr);
         gap: 0.1rem;
         padding: 0.2rem;
     }
     
     .smiley-face {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
     
     .stats-container {
@@ -752,16 +752,16 @@ footer {
     }
     
     .smiley-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(30, 1fr);
         gap: 0.1rem;
         padding: 0.2rem;
     }
     
     .smiley-face {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
     }
     
     .stats-container {
