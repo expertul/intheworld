@@ -152,14 +152,19 @@ header p {
 main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0.5rem;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: start;
+    flex: 1;
 }
 
 /* Glassmorphism Card */
@@ -234,10 +239,10 @@ main {
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
-    padding: 1rem;
+    padding: 0.5rem;
     box-shadow: var(--shadow-light);
     position: sticky;
-    top: 1rem;
+    top: 0.5rem;
     height: fit-content;
 }
 
@@ -268,10 +273,10 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-small);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    min-height: 200px;
-    max-height: 350px;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    min-height: 150px;
+    max-height: 250px;
     overflow-y: auto;
     display: flex;
     align-items: flex-start;
@@ -285,8 +290,8 @@ main {
 }
 
 #jokeText {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: var(--text-primary);
     font-weight: 500;
     text-align: left;
@@ -338,15 +343,15 @@ main {
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
-    padding: 1rem;
+    padding: 0.5rem;
     box-shadow: var(--shadow-light);
 }
 
 .smiley-section h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -355,9 +360,9 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    gap: 0.5rem;
-    margin: 1rem 0;
-    padding: 1rem;
+    gap: 0.3rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -371,9 +376,9 @@ main {
     backdrop-filter: blur(20px);
     border: 2px solid var(--glass-border);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -544,11 +549,11 @@ main {
 /* Stats Container */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin: 1rem auto 0;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin: 0.5rem auto 0;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
 }
 
 .stat-item {
@@ -556,7 +561,7 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-small);
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: center;
     transition: var(--transition);
 }
@@ -568,15 +573,15 @@ main {
 
 .stat-number {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
     font-family: 'JetBrains Mono', monospace;
 }
 
 .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     font-weight: 500;
 }
