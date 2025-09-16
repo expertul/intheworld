@@ -1,0 +1,20 @@
+# Cron job configuration for automated ads.txt updates
+# Add this line to your crontab to update ads.txt daily
+
+# Update ads.txt every day at 2:00 AM
+0 2 * * * /path/to/update-ads-txt.sh >> /var/log/ads-txt-update.log 2>&1
+
+# Alternative: Update every 6 hours
+# 0 */6 * * * /path/to/update-ads-txt.sh >> /var/log/ads-txt-update.log 2>&1
+
+# Alternative: Update every hour
+# 0 * * * * /path/to/update-ads-txt.sh >> /var/log/ads-txt-update.log 2>&1
+
+# To add this to your crontab:
+# 1. Make the script executable: chmod +x update-ads-txt.sh
+# 2. Edit crontab: crontab -e
+# 3. Add the line above (choose your preferred frequency)
+# 4. Save and exit
+
+# To check if the cron job is running:
+# tail -f /var/log/ads-txt-update.log

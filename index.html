@@ -1,211 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Joke Generator - Unlimited Laughs</title>
-    <meta name="description" content="Generate unlimited AI-powered jokes with a single click. Never see the same joke twice! Modern, friendly, and fun experience.">
-    <meta name="keywords" content="AI jokes, humor, comedy, generator, unlimited, modern, fun">
-    <meta name="author" content="AI Joke Generator">
-    <meta name="robots" content="index, follow">
+    <!-- Ezoic Privacy Scripts - Must load first for compliance -->
+    <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false"></script>
+    <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false"></script>
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AI Joke Generator - Unlimited Laughs">
-    <meta property="og:description" content="Generate unlimited AI-powered jokes with a single click. Never see the same joke twice!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.minglemining.com/">
-    <meta property="og:image" content="https://www.minglemining.com/og-image.jpg">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Joke Generator - Unlimited Laughs">
-    <meta name="twitter:description" content="Generate unlimited AI-powered jokes with a single click. Never see the same joke twice!">
-    <meta name="twitter:image" content="https://www.minglemining.com/twitter-image.jpg">
-    
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "AI Joke Generator",
-        "description": "Generate unlimited AI-powered jokes with a single click",
-        "url": "https://www.minglemining.com/",
-        "applicationCategory": "Entertainment",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        }
-    }
+    <!-- Ezoic Header Script - Main ad system initialization -->
+    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+    <script>
+        window.ezstandalone = window.ezstandalone || {};
+        ezstandalone.cmd = ezstandalone.cmd || [];
     </script>
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9890861235940227" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JokeGen AI - Unlimited AI Jokes</title>
+    <meta name="description" content="JokeGen AI - Get unlimited AI-generated jokes! Never see the same joke twice with our advanced AI humor system. Modern, fast, and hilarious!">
+    <meta name="keywords" content="AI jokes, unlimited jokes, humor, funny, entertainment, laugh, comedy, artificial intelligence, joke generator, modern jokes">
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
+    <!-- Ezoic Integration -->
+    <script>
+        (function(e,z,o,i,c){
+            e.z=o;e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)};
+            e[o].c=c;
+            var s=z.createElement("script");s.async=1;s.src=i;
+            var t=z.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);
+        })(window,document,"ezoic","//www.ezoic.com/ezoic.js",0);
+    </script>
     
-    <!-- Styles -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😄</text></svg>">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="ai-badge">
-                <span>⚡</span>
-                <span>Powered by AI</span>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-robot"></i>
+                <span>JokeGen AI</span>
             </div>
-            <div class="ai-message">Click any smiley face to get your personalized joke! 🎭</div>
+            <div class="nav-stats">
+                <div class="stat-item">
+                    <i class="fas fa-laugh"></i>
+                    <span id="navJokeCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-fire"></i>
+                    <span id="navSessionCount">0</span>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Container -->
-    <main class="main-container">
-        <!-- Top Ad Unit -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Unlimited</span>
+                    <span class="highlight">AI Jokes</span>
+                </h1>
+                <p class="hero-subtitle">Never see the same joke twice with our advanced AI humor system</p>
+                <div class="hero-badges">
+                    <div class="badge">
+                        <i class="fas fa-brain"></i>
+                        <span>AI Powered</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-infinity"></i>
+                        <span>Unlimited</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile Ready</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="floating-emoji">😂</div>
+                    <div class="floating-emoji">🤣</div>
+                    <div class="floating-emoji">😆</div>
+                    <div class="floating-emoji">🤪</div>
+                    <div class="floating-emoji">😄</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <!-- Ezoic Ad Unit -->
         <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle main-ad"
-                 style="display:block"
-                 data-ad-client="ca-pub-9890861235940227"
-                 data-ad-slot="9768593395"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+            <div id="ezoic-pub-ad-placeholder-101"></div>
+            <script>
+                ezstandalone.cmd.push(function () {
+                    ezstandalone.showAds(101);
+                });
+            </script>
         </div>
 
-        <!-- Content Grid -->
-        <div class="content-grid">
-            <!-- Smiley Section (Left) -->
-            <section class="smiley-section">
-                <h2>🎭 Choose Your Mood</h2>
-                
-                <div class="smiley-grid">
-                    <!-- Row 1 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy1">😊</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing1">😂</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking1">😉</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool1">😎</button>
-                    
-                    <!-- Row 2 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="love1">🥰</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking1">🤔</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised1">😮</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused1">😕</button>
-                    
-                    <!-- Row 3 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly1">🤪</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="nerd1">🤓</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="party1">🎉</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="fire1">🔥</button>
-                    
-                    <!-- Row 4 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy2">😄</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing2">🤣</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking2">😘</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool2">😏</button>
-                    
-                    <!-- Row 5 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="love2">😍</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking2">🧐</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised2">😲</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused2">😵</button>
-                    
-                    <!-- Row 6 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly2">😜</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="nerd2">🤖</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="party2">🎊</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="fire2">⚡</button>
-                    
-                    <!-- Row 7 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy3">😃</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing3">😆</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking3">😋</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool3">🤑</button>
-                    
-                    <!-- Row 8 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="love3">💕</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="thinking3">💭</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="surprised3">🤯</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="confused3">🤷</button>
-                    
-                    <!-- Row 9 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="silly3">🤡</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="nerd3">👨‍💻</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="party3">🎈</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="fire3">🌟</button>
-                    
-                    <!-- Row 10 -->
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="happy4">😁</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="laughing4">😹</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="winking4">😚</button>
-                    <button class="smiley-face" onclick="generateAIJoke()" data-mood="cool4">🆒</button>
-                </div>
-                
-                <!-- Loading Indicator -->
-                <div class="loading-indicator" id="loadingIndicator">
-                    <div class="loading-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <!-- Joke Generator Section -->
+        <section class="joke-section">
+            <div class="joke-card">
+                <div class="joke-header">
+                    <div class="joke-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <p>AI is crafting your perfect joke...</p>
-                </div>
-                
-                <!-- Stats Container -->
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalCount">0</span>
-                        <span class="stat-label">Total Jokes</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="uniqueCount">0</span>
-                        <span class="stat-label">Unique Jokes</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="sessionCount">0</span>
-                        <span class="stat-label">This Session</span>
+                    <div class="joke-info">
+                        <h3>AI Joke Generator</h3>
+                        <p>Powered by advanced artificial intelligence</p>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Joke Section (Right) -->
-            <section class="joke-section">
-                <h2>🎪 Your Joke Awaits</h2>
                 
                 <div class="joke-display" id="jokeDisplay">
                     <div class="joke-content">
-                        <p id="jokeText">Welcome to the AI Joke Generator! 🎭<br><br>Click any smiley face to get your first personalized joke. Each joke is unique and crafted just for you! ✨</p>
+                        <div class="joke-text-container">
+                            <p id="jokeText">Welcome! Click the generate button to get your first AI joke! 🚀</p>
+                        </div>
+                        <div class="joke-reactions">
+                            <button class="reaction-btn" id="likeBtn">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="reaction-btn" id="shareBtn">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="joke-meta">
-                        <span class="joke-id" id="jokeId">#0000</span>
-                        <span class="joke-type" id="jokeType">Ready to Laugh</span>
+                        <div class="joke-id">
+                            <i class="fas fa-hashtag"></i>
+                            <span id="jokeId">#0000</span>
+                        </div>
+                        <div class="joke-type">
+                            <i class="fas fa-tag"></i>
+                            <span id="jokeType">AI Generated</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+                
+                <div class="action-section">
+                    <button class="generate-btn" id="aiButton" onclick="generateAIJoke()">
+                        <div class="btn-content">
+                            <div class="btn-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <div class="btn-text">
+                                <span class="btn-title">Generate Joke</span>
+                                <span class="btn-subtitle">Click or press Space</span>
+                            </div>
+                        </div>
+                        <div class="btn-ripple"></div>
+                    </button>
+                    
+                    <div class="loading-indicator" id="loadingIndicator">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                        </div>
+                        <p>AI is crafting your joke...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Dashboard -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-laugh-beam"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="jokeCount">0</div>
+                        <div class="stat-label">Total Jokes</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="uniqueCount">0</div>
+                        <div class="stat-label">Unique Jokes</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="sessionCount">0</div>
+                        <div class="stat-label">This Session</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="avgTime">0s</div>
+                        <div class="stat-label">Avg. Time</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ezoic In-Article Ad -->
+        <div class="ad-container">
+            <div id="ezoic-pub-ad-placeholder-102"></div>
+            <script>
+                ezstandalone.cmd.push(function () {
+                    ezstandalone.showAds(102);
+                });
+            </script>
         </div>
 
-        <!-- Bottom Ad Unit -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle bottom-ad"
-                 style="display:block"
-                 data-ad-client="ca-pub-9890861235940227"
-                 data-ad-slot="9768593395"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-header">
+                <h2>Why Choose JokeGen AI?</h2>
+                <p>Experience the future of humor with our cutting-edge AI technology</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Advanced AI</h3>
+                    <p>Powered by sophisticated machine learning algorithms that understand humor patterns</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Unlimited Content</h3>
+                    <p>Never run out of jokes with our infinite generation system</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Get instant jokes with our optimized AI processing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>No Repeats</h3>
+                    <p>Advanced tracking ensures every joke is unique</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Optimized</h3>
+                    <p>Perfect experience on all devices and screen sizes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Family Friendly</h3>
+                    <p>Clean, appropriate humor for all ages</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ezoic Sidebar Ad -->
+        <div class="sidebar-ad">
+            <div id="ezoic-pub-ad-placeholder-103"></div>
+            <script>
+                ezstandalone.cmd.push(function () {
+                    ezstandalone.showAds(103);
+                });
+            </script>
+        </div>
+
+        <!-- Dynamic Content Ads (for infinite scroll or additional content) -->
+        <div class="ad-container" id="dynamicAds" style="display: none;">
+            <div id="ezoic-pub-ad-placeholder-104"></div>
+            <div id="ezoic-pub-ad-placeholder-105"></div>
+            <script>
+                // These will be activated dynamically when needed
+                // ezstandalone.cmd.push(function () {
+                //     ezstandalone.showAds(104, 105);
+                // });
+            </script>
         </div>
     </main>
 
-    <!-- Scripts -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        <span>JokeGen AI</span>
+                    </div>
+                    <p>Unlimited AI-generated jokes for endless laughter</p>
+                </div>
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <span class="stat-number" id="totalJokes">0</span>
+                        <span class="stat-label">Total Jokes</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-number" id="totalUnique">0</span>
+                        <span class="stat-label">Unique Jokes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JokeGen AI. Made with ❤️ and 🤖 for unlimited laughter!</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
     <script>
-        // Initialize AdSense ads
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        // Initialize Ezoic
+        if (typeof ezoic !== 'undefined') {
+            ezoic('init');
+        }
     </script>
 </body>
 </html>

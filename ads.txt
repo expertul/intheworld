@@ -1,1 +1,7 @@
-google.com, pub-9890861235940227, DIRECT, f08c47fec0942fa0
+# ads.txt file for minglemining.com
+# This file is managed by Ezoic's ads.txt manager
+# For automatic updates, use the redirect method below
+
+# IMPORTANT: This file should redirect to Ezoic's ads.txt manager
+# Use one of the server configuration methods below instead of this static file
+Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/https://www.minglemining.com/

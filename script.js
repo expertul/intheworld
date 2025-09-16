@@ -6,34 +6,51 @@ class AIJokeGenerator {
         this.sessionJokes = 0;
         this.uniqueJokes = 0;
         this.currentJokeId = 0;
+        this.avgGenerationTime = 0;
+        this.generationTimes = [];
+        this.likedJokes = new Set();
+        this.startTime = 0;
         
-        // AI-powered joke templates and patterns - LONG JOKES (up to 10 lines)
+        // AI-powered joke templates and patterns
         this.jokePatterns = [
-            // Long Story format
-            { type: 'story', templates: [
-                "So {subject} walks into {action} and the bartender says, \"We don't serve {subject} here.\"\n{subject} says, \"That's okay, I don't drink anyway.\"\nThe bartender says, \"Then why are you here?\"\n{subject} replies, \"I heard you have the best {punchline} in town.\"\nThe bartender laughs and says, \"You're right!\"\n{subject} says, \"Great! Can I have one?\"\nThe bartender says, \"Sure, but it's going to cost you.\"\n{subject} says, \"How much?\"\nThe bartender says, \"{punchline}!\"\n{subject} says, \"That's expensive, but worth it!\"",
-                
-                "A {subject} goes to {action} and sees a sign that says \"{punchline}\".\n{subject} thinks, \"That's strange, but I'll try it.\"\n{subject} orders the {punchline} and the waiter brings it.\n{subject} takes a bite and says, \"This is amazing!\"\nThe waiter says, \"I'm glad you like it!\"\n{subject} says, \"What's the secret ingredient?\"\nThe waiter says, \"{punchline}!\"\n{subject} says, \"Really? That's incredible!\"\nThe waiter says, \"Yes, and it's our specialty!\"\n{subject} says, \"I'll definitely come back for more!\"",
-                
-                "Once upon a time, {subject} decided to {action}.\n{subject} thought it would be easy, but it wasn't.\n{subject} tried and tried, but nothing worked.\nFinally, {subject} asked for help from {punchline}.\n{punchline} said, \"I can help you, but first you need to {action}.\"\n{subject} said, \"But that's what I'm trying to do!\"\n{punchline} said, \"Ah, I see the problem!\"\n{subject} said, \"What's the problem?\"\n{punchline} said, \"You're doing it wrong! Here's how to do it right.\"\n{subject} followed the advice and finally succeeded!",
-                
-                "A {subject} and a {action} walk into a bar.\nThe bartender says, \"What can I get you?\"\n{subject} says, \"I'll have a {punchline}.\"\n{action} says, \"I'll have the same.\"\nThe bartender says, \"Coming right up!\"\n{subject} says, \"This is the best {punchline} I've ever had!\"\n{action} says, \"I agree! It's amazing!\"\nThe bartender says, \"I'm glad you like it!\"\n{subject} says, \"What's your secret?\"\nThe bartender says, \"{punchline}!\"",
-                
-                "My {subject} called me and said, \"I need help with {action}.\"\nI said, \"What's the problem?\"\n{subject} said, \"I can't figure out how to {action}.\"\nI said, \"That's easy! Here's what you do.\"\nI explained the process step by step.\n{subject} said, \"That makes sense!\"\nI said, \"Try it and let me know how it goes.\"\n{subject} called back later and said, \"It worked perfectly!\"\nI said, \"Great! I'm glad I could help.\"\n{subject} said, \"Thank you! You're the best {punchline}!\""
-            ]},
-            // Long Question-Answer format
+            // Question-Answer format
             { type: 'qa', templates: [
-                "Why did {subject} {action}?\nBecause {subject} heard that {punchline} was the best way to {action}.\nBut when {subject} tried it, nothing happened.\nSo {subject} asked {punchline} for advice.\n{punchline} said, \"You're doing it wrong!\"\n{subject} said, \"How should I do it?\"\n{punchline} said, \"Like this!\"\n{subject} tried again and it worked perfectly!\n{subject} said, \"Thank you! That was amazing!\"\n{punchline} said, \"You're welcome! Now you know the secret!\"",
-                
-                "What do you call {subject} that {action}?\nYou call them {punchline}!\nBut why do you call them that?\nBecause {subject} is so good at {action} that everyone is amazed.\nHow good are they?\nSo good that {punchline} is the only word that describes them.\nReally?\nYes! {subject} is the best at {action} in the whole world.\nWow! That's incredible!\nI know! That's why we call them {punchline}!\nThat makes perfect sense!",
-                
-                "How does {subject} {action}?\n{subject} {action} by using {punchline}.\nBut how does {punchline} work?\n{punchline} works by combining {action} with special techniques.\nWhat kind of techniques?\nThe kind that make {subject} amazing at {action}.\nReally?\nYes! {subject} has been practicing for years.\nHow long?\nLong enough to become the best at {action}.\nThat's impressive!\nI know! That's why {subject} is so good at {punchline}!"
+                "Why did {subject} {action}? Because {punchline}!",
+                "What do you call {subject} that {action}? {punchline}!",
+                "How does {subject} {action}? {punchline}!",
+                "Why don't {subject} {action}? Because {punchline}!",
+                "What's the difference between {subject} and {punchline}? {subject} {action}!",
+                "Why did {subject} go to {action}? To {punchline}!",
+                "What do you get when you cross {subject} with {action}? {punchline}!",
+                "Why did {subject} {action}? {punchline}!",
+                "What's {subject}'s favorite {action}? {punchline}!",
+                "Why don't {subject} ever {action}? Because {punchline}!"
             ]},
-            // Long Conversation format
-            { type: 'conversation', templates: [
-                "{subject}: \"I need help with {action}.\"\n{punchline}: \"What's the problem?\"\n{subject}: \"I can't figure out how to {action}.\"\n{punchline}: \"That's easy! Here's what you do.\"\n{subject}: \"Really? Show me!\"\n{punchline}: \"First, you need to {action}.\"\n{subject}: \"Okay, I'm doing that.\"\n{punchline}: \"Good! Now {action}.\"\n{subject}: \"This is working!\"\n{punchline}: \"Perfect! You've got it now!\"",
-                
-                "A {subject} meets a {action} at {punchline}.\n{subject}: \"Hello! I'm here to {action}.\"\n{action}: \"Welcome! I can help you with that.\"\n{subject}: \"Great! What do I need to do?\"\n{action}: \"First, you need to {punchline}.\"\n{subject}: \"That sounds interesting!\"\n{action}: \"It is! And then you {action}.\"\n{subject}: \"This is amazing!\"\n{action}: \"I'm glad you like it!\"\n{subject}: \"Thank you for your help!\"\n{action}: \"You're very welcome!\""
+            // Statement format
+            { type: 'statement', templates: [
+                "{subject} walks into {action} and says, \"{punchline}\"",
+                "I told {subject} a joke about {action}. {punchline}",
+                "{subject} is so {action} that {punchline}",
+                "My {subject} asked me to {action}. I said, \"{punchline}\"",
+                "{subject} and {action} walk into a bar. {punchline}",
+                "I tried to {action} with {subject}, but {punchline}",
+                "{subject} said to {action}, \"{punchline}\"",
+                "The {subject} was {action} until {punchline}",
+                "I asked {subject} to {action}, and they said, \"{punchline}\"",
+                "{subject} went to {action} and discovered {punchline}"
+            ]},
+            // One-liner format
+            { type: 'oneliner', templates: [
+                "{subject} {action} {punchline}",
+                "I'm not {subject}, but I {action} {punchline}",
+                "{subject} is like {action} - {punchline}",
+                "I told my {subject} I {action}, and they said {punchline}",
+                "{subject} {action} so much that {punchline}",
+                "My {subject} is {action} because {punchline}",
+                "I {action} my {subject} and now {punchline}",
+                "{subject} {action} better than {punchline}",
+                "I asked {subject} to {action}, but {punchline}",
+                "{subject} {action} while {punchline}"
             ]}
         ];
         
@@ -60,19 +77,23 @@ class AIJokeGenerator {
         ];
         
         this.punchlines = [
-            'magic', 'pizza', 'coffee', 'chocolate', 'ice cream', 'cookies', 'cake', 'donuts',
-            'sandwich', 'burger', 'fries', 'popcorn', 'candy', 'gum', 'soda', 'juice',
-            'tea', 'milk', 'water', 'smoothie', 'shake', 'beer', 'wine', 'cocktail',
-            'music', 'dance', 'singing', 'painting', 'drawing', 'writing', 'reading', 'cooking',
-            'gardening', 'fishing', 'hiking', 'swimming', 'running', 'cycling', 'dancing', 'yoga',
-            'meditation', 'sleeping', 'dreaming', 'laughing', 'smiling', 'hugging', 'kissing', 'loving',
-            'friendship', 'family', 'happiness', 'joy', 'peace', 'harmony', 'balance', 'wisdom',
-            'knowledge', 'learning', 'teaching', 'helping', 'sharing', 'caring', 'giving', 'receiving',
-            'adventure', 'exploration', 'discovery', 'invention', 'creation', 'imagination', 'creativity', 'inspiration',
-            'motivation', 'determination', 'perseverance', 'patience', 'kindness', 'generosity', 'honesty', 'integrity',
-            'courage', 'bravery', 'strength', 'power', 'energy', 'vitality', 'health', 'wellness',
-            'success', 'achievement', 'victory', 'triumph', 'celebration', 'party', 'festival', 'holiday',
-            'vacation', 'travel', 'journey', 'trip', 'expedition', 'mission', 'quest', 'adventure'
+            'it was a piece of cake', 'they were in a pickle', 'it was a real eye-opener',
+            'they were over the moon', 'it was a walk in the park', 'they were on cloud nine',
+            'it was a breath of fresh air', 'they were in hot water', 'it was a wild goose chase',
+            'they were under the weather', 'it was a drop in the bucket', 'they were on thin ice',
+            'it was a blessing in disguise', 'they were in the doghouse', 'it was a shot in the dark',
+            'they were on top of the world', 'it was a needle in a haystack', 'they were in the same boat',
+            'it was a diamond in the rough', 'they were on the same page', 'it was a wolf in sheep\'s clothing',
+            'they were in the driver\'s seat', 'it was a bird in the hand', 'they were on the ball',
+            'it was a chip off the old block', 'they were in the spotlight', 'it was a feather in their cap',
+            'they were on the right track', 'it was a taste of their own medicine', 'they were in the clear',
+            'it was a labor of love', 'they were on the fence', 'it was a matter of time',
+            'they were in the loop', 'it was a stroke of luck', 'they were on the same wavelength',
+            'it was a work of art', 'they were in the zone', 'it was a sight for sore eyes',
+            'they were on the edge of their seat', 'it was a breath of fresh air', 'they were in the groove',
+            'it was a ray of sunshine', 'they were on the up and up', 'it was a sign of the times',
+            'they were in the nick of time', 'it was a change of pace', 'they were on the level',
+            'it was a step in the right direction', 'they were in the fast lane', 'it was a turn of events'
         ];
         
         this.initializeApp();
@@ -81,6 +102,8 @@ class AIJokeGenerator {
     initializeApp() {
         this.loadData();
         this.setupEventListeners();
+        this.setupThemeToggle();
+        this.setupReactionButtons();
         this.updateDisplay();
         this.preloadJokes();
     }
@@ -94,11 +117,18 @@ class AIJokeGenerator {
             this.totalJokes = data.totalJokes || 0;
             this.uniqueJokes = data.uniqueJokes || 0;
             this.currentJokeId = data.currentJokeId || 0;
+            this.avgGenerationTime = data.avgGenerationTime || 0;
+            this.generationTimes = data.generationTimes || [];
+            this.likedJokes = new Set(data.likedJokes || []);
         }
         
         // Load session data
         const sessionData = sessionStorage.getItem('sessionJokes');
         this.sessionJokes = parseInt(sessionData) || 0;
+        
+        // Load theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
     }
     
     saveData() {
@@ -106,18 +136,25 @@ class AIJokeGenerator {
             jokeHistory: Array.from(this.jokeHistory),
             totalJokes: this.totalJokes,
             uniqueJokes: this.uniqueJokes,
-            currentJokeId: this.currentJokeId
+            currentJokeId: this.currentJokeId,
+            avgGenerationTime: this.avgGenerationTime,
+            generationTimes: this.generationTimes,
+            likedJokes: Array.from(this.likedJokes)
         };
         localStorage.setItem('aiJokeGenerator', JSON.stringify(data));
         sessionStorage.setItem('sessionJokes', this.sessionJokes.toString());
     }
     
     setupEventListeners() {
+        const aiButton = document.getElementById('aiButton');
+        
         // Keyboard support
         document.addEventListener('keydown', (event) => {
             if (event.code === 'Space' || event.code === 'Enter') {
                 event.preventDefault();
-                this.generateAIJoke();
+                if (!aiButton.disabled) {
+                    this.generateAIJoke();
+                }
             }
         });
         
@@ -133,6 +170,15 @@ class AIJokeGenerator {
             touchEndY = event.changedTouches[0].screenY;
             this.handleSwipe(touchStartY, touchEndY);
         });
+        
+        // Scroll-based dynamic content loading (infinite scroll simulation)
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                this.handleScroll();
+            }, 100);
+        });
     }
     
     handleSwipe(startY, endY) {
@@ -142,39 +188,134 @@ class AIJokeGenerator {
         if (Math.abs(diff) > swipeThreshold) {
             if (diff > 0) {
                 // Swipe up - generate new joke
-                this.generateAIJoke();
+                const aiButton = document.getElementById('aiButton');
+                if (!aiButton.disabled) {
+                    this.generateAIJoke();
+                }
             }
         }
     }
     
+    handleScroll() {
+        // Check if user has scrolled near the bottom (80% of page)
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollPercent = (scrollTop + windowHeight) / documentHeight;
+        
+        // Load additional content when user scrolls to 80% of page
+        if (scrollPercent > 0.8) {
+            this.loadAdditionalContent();
+        } else if (scrollPercent < 0.5) {
+            // Unload additional content when user scrolls back up
+            this.unloadAdditionalContent();
+        }
+    }
+    
+    setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Add animation effect
+                themeToggle.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    themeToggle.style.transform = 'scale(1)';
+                }, 150);
+            });
+        }
+    }
+    
+    setupReactionButtons() {
+        const likeBtn = document.getElementById('likeBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        
+        if (likeBtn) {
+            likeBtn.addEventListener('click', () => {
+                const currentJoke = document.getElementById('jokeText').textContent;
+                if (this.likedJokes.has(currentJoke)) {
+                    this.likedJokes.delete(currentJoke);
+                    likeBtn.style.color = '';
+                    likeBtn.style.transform = 'scale(1)';
+                } else {
+                    this.likedJokes.add(currentJoke);
+                    likeBtn.style.color = '#ef4444';
+                    likeBtn.style.transform = 'scale(1.2)';
+                }
+                this.saveData();
+                
+                // Reset animation
+                setTimeout(() => {
+                    likeBtn.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+        
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                const jokeText = document.getElementById('jokeText').textContent;
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Check out this AI joke!',
+                        text: jokeText,
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback to clipboard
+                    navigator.clipboard.writeText(jokeText).then(() => {
+                        shareBtn.style.color = '#10b981';
+                        shareBtn.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            shareBtn.style.color = '';
+                            shareBtn.style.transform = 'scale(1)';
+                        }, 200);
+                    });
+                }
+            });
+        }
+    }
+    
     generateAIJoke() {
+        const aiButton = document.getElementById('aiButton');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const jokeText = document.getElementById('jokeText');
         const jokeId = document.getElementById('jokeId');
         const jokeType = document.getElementById('jokeType');
         
+        // Start timing
+        this.startTime = Date.now();
+        
         // Show loading state
-        if (loadingIndicator) loadingIndicator.classList.add('active');
+        aiButton.style.opacity = '0';
+        loadingIndicator.classList.add('active');
         
         // Simulate AI processing time
         setTimeout(() => {
             const joke = this.createUniqueJoke();
             
-            // Update display with animation
-            if (jokeText) {
-                jokeText.style.opacity = '0';
-                jokeText.style.transform = 'translateY(20px)';
+            // Calculate generation time
+            const generationTime = (Date.now() - this.startTime) / 1000;
+            this.generationTimes.push(generationTime);
+            if (this.generationTimes.length > 10) {
+                this.generationTimes.shift(); // Keep only last 10 times
             }
+            this.avgGenerationTime = this.generationTimes.reduce((a, b) => a + b, 0) / this.generationTimes.length;
+            
+            // Update display with animation
+            jokeText.style.opacity = '0';
+            jokeText.style.transform = 'translateY(20px)';
             
             setTimeout(() => {
-                if (jokeText) jokeText.textContent = joke.text;
-                if (jokeId) jokeId.textContent = `#${joke.id.toString().padStart(4, '0')}`;
-                if (jokeType) jokeType.textContent = joke.type;
+                jokeText.textContent = joke.text;
+                jokeId.textContent = `#${joke.id.toString().padStart(4, '0')}`;
+                jokeType.textContent = joke.type;
                 
-                if (jokeText) {
-                    jokeText.style.opacity = '1';
-                    jokeText.style.transform = 'translateY(0)';
-                }
+                jokeText.style.opacity = '1';
+                jokeText.style.transform = 'translateY(0)';
                 
                 // Update counters
                 this.totalJokes++;
@@ -186,8 +327,12 @@ class AIJokeGenerator {
                 this.saveData();
                 this.trackEngagement(joke);
                 
-                // Hide loading indicator
-                if (loadingIndicator) loadingIndicator.classList.remove('active');
+                // Reset button
+                aiButton.style.opacity = '1';
+                loadingIndicator.classList.remove('active');
+                
+                // Refresh ads for new content (Ezoic dynamic content)
+                this.refreshAdsForNewContent();
                 
             }, 300);
             
@@ -233,9 +378,6 @@ class AIJokeGenerator {
         // Add some AI creativity with variations
         jokeText = this.addAICreativity(jokeText);
         
-        // Fix quote formatting - replace "text" with text:
-        jokeText = jokeText.replace(/"([^"]+)"/g, '$1:');
-        
         return {
             id: this.currentJokeId + 1,
             text: jokeText,
@@ -270,9 +412,9 @@ class AIJokeGenerator {
     
     getJokeType(patternType) {
         const types = {
-            'story': 'Long Story',
             'qa': 'Question & Answer',
-            'conversation': 'Conversation'
+            'statement': 'Story Joke',
+            'oneliner': 'One-Liner'
         };
         return types[patternType] || 'AI Generated';
     }
@@ -287,6 +429,13 @@ class AIJokeGenerator {
         document.getElementById('sessionCount').textContent = this.sessionJokes;
         document.getElementById('totalJokes').textContent = this.totalJokes;
         document.getElementById('totalUnique').textContent = this.uniqueJokes;
+        document.getElementById('avgTime').textContent = `${this.avgGenerationTime.toFixed(1)}s`;
+        
+        // Update navigation stats
+        const navJokeCount = document.getElementById('navJokeCount');
+        const navSessionCount = document.getElementById('navSessionCount');
+        if (navJokeCount) navJokeCount.textContent = this.totalJokes;
+        if (navSessionCount) navSessionCount.textContent = this.sessionJokes;
     }
     
     trackEngagement(joke) {
@@ -328,38 +477,11 @@ class AIJokeGenerator {
         if (typeof fbq !== 'undefined') {
             fbq('track', eventName, eventData);
         }
-    }
-    
-    showNotification(message) {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            z-index: 1000;
-            font-size: 0.9rem;
-            font-weight: 500;
-            animation: slideIn 0.3s ease-out;
-        `;
         
-        document.body.appendChild(notification);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-in';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 3000);
+        // Ezoic Analytics
+        if (typeof ezoic !== 'undefined') {
+            ezoic('event', eventName, eventData);
+        }
     }
     
     preloadJokes() {
@@ -369,6 +491,164 @@ class AIJokeGenerator {
                 this.generateJoke();
             }
         }, 2000);
+    }
+    
+    // Ezoic Dynamic Content Methods
+    refreshAdsForNewContent() {
+        // Refresh ads when new content is generated
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                // Refresh all ads for new content
+                ezstandalone.showAds();
+            });
+        }
+    }
+    
+    destroyAndRecreateAds() {
+        // Destroy existing ads and recreate them (for content changes)
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                // Destroy existing placeholders
+                ezstandalone.destroyPlaceholders(101, 102, 103);
+                // Recreate ads
+                ezstandalone.showAds(101, 102, 103);
+            });
+        }
+    }
+    
+    addNewAdPlaceholders(placeholderIds) {
+        // Add new ad placeholders for dynamic content
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                ezstandalone.showAds(...placeholderIds);
+            });
+        }
+    }
+    
+    removeAdPlaceholders(placeholderIds) {
+        // Remove ad placeholders when content is no longer visible
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                ezstandalone.destroyPlaceholders(...placeholderIds);
+            });
+        }
+    }
+    
+    // Infinite Scroll / Additional Content Handler
+    loadAdditionalContent() {
+        // Show dynamic ads container
+        const dynamicAds = document.getElementById('dynamicAds');
+        if (dynamicAds) {
+            dynamicAds.style.display = 'block';
+            
+            // Add new ad placeholders
+            this.addNewAdPlaceholders([104, 105]);
+        }
+    }
+    
+    unloadAdditionalContent() {
+        // Hide dynamic ads container
+        const dynamicAds = document.getElementById('dynamicAds');
+        if (dynamicAds) {
+            dynamicAds.style.display = 'none';
+            
+            // Remove ad placeholders
+            this.removeAdPlaceholders([104, 105]);
+        }
+    }
+    
+    // Handle page changes (if implementing SPA functionality)
+    handlePageChange(newUrl) {
+        // Refresh ads for new page content
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                // Force ads to refresh on new page
+                ezstandalone.showAds();
+            });
+        }
+    }
+    
+    // Ezoic Debugger Support
+    initializeEzoicDebugger() {
+        // Check if debugger is enabled via URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const debuggerEnabled = urlParams.get('ez_js_debugger') === '1';
+        
+        if (debuggerEnabled) {
+            console.log('🔍 Ezoic Debugger Enabled');
+            console.log('📊 Debug Information:');
+            console.log('- Script in <head>: ✅ Ezoic sa.min.js loaded');
+            console.log('- Privacy Scripts: ✅ CMP scripts loaded');
+            console.log('- Ad Placeholders: 101, 102, 103, 104, 105');
+            console.log('- Dynamic Content: ✅ Enabled');
+            console.log('- Infinite Scroll: ✅ Enabled');
+            
+            // Add debug information to page
+            this.addDebugInfo();
+        }
+    }
+    
+    addDebugInfo() {
+        // Create debug info panel
+        const debugPanel = document.createElement('div');
+        debugPanel.id = 'ezoic-debug-panel';
+        debugPanel.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2d3748;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        `;
+        
+        debugPanel.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 10px; color: #68d391;">🔍 Ezoic Debug Mode</div>
+            <div>✅ Scripts: Loaded</div>
+            <div>✅ Privacy: CMP Active</div>
+            <div>✅ Placeholders: 101, 102, 103</div>
+            <div>✅ Dynamic: 104, 105</div>
+            <div>✅ Jokes Generated: <span id="debug-joke-count">0</span></div>
+            <div>✅ Session Time: <span id="debug-session-time">0s</span></div>
+            <button onclick="this.parentElement.remove()" style="
+                background: #e53e3e;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+                font-size: 10px;
+            ">Close</button>
+        `;
+        
+        document.body.appendChild(debugPanel);
+        
+        // Update debug info periodically
+        setInterval(() => {
+            const jokeCount = document.getElementById('debug-joke-count');
+            const sessionTime = document.getElementById('debug-session-time');
+            
+            if (jokeCount) {
+                jokeCount.textContent = this.sessionJokes;
+            }
+            
+            if (sessionTime) {
+                const sessionStart = sessionStorage.getItem('sessionStart') || Date.now();
+                const elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+                sessionTime.textContent = `${elapsed}s`;
+            }
+        }, 1000);
+        
+        // Store session start time
+        if (!sessionStorage.getItem('sessionStart')) {
+            sessionStorage.setItem('sessionStart', Date.now());
+        }
     }
 }
 
@@ -381,12 +661,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function generateAIJoke() {
     if (window.aiJokeGenerator) {
         window.aiJokeGenerator.generateAIJoke();
-    } else {
-        // Try to initialize again
-        window.aiJokeGenerator = new AIJokeGenerator();
-        if (window.aiJokeGenerator) {
-            window.aiJokeGenerator.generateAIJoke();
-        }
     }
 }
 
@@ -429,131 +703,6 @@ window.addEventListener('load', function() {
     }
 });
 
-// Social Sharing Functions
-function shareToFacebook() {
-    const currentJoke = document.getElementById('jokeText').textContent;
-    const jokeId = document.getElementById('jokeId').textContent;
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`${currentJoke} - ${jokeId}`)}`;
-    window.open(shareUrl, '_blank', 'width=600,height=400');
-    
-    if (window.aiJokeGenerator) {
-        window.aiJokeGenerator.trackEvent('social_share', { platform: 'facebook' });
-    }
-}
-
-function shareToTwitter() {
-    const currentJoke = document.getElementById('jokeText').textContent;
-    const jokeId = document.getElementById('jokeId').textContent;
-    const shareText = `${currentJoke} - ${jokeId} via @AdSenseWeb`;
-    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
-    window.open(shareUrl, '_blank', 'width=600,height=400');
-    
-    if (window.aiJokeGenerator) {
-        window.aiJokeGenerator.trackEvent('social_share', { platform: 'twitter' });
-    }
-}
-
-function shareToWhatsApp() {
-    const currentJoke = document.getElementById('jokeText').textContent;
-    const jokeId = document.getElementById('jokeId').textContent;
-    const shareText = `${currentJoke} - ${jokeId}\n\nCheck out AdSense Web for more jokes!`;
-    const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-    window.open(shareUrl, '_blank');
-    
-    if (window.aiJokeGenerator) {
-        window.aiJokeGenerator.trackEvent('social_share', { platform: 'whatsapp' });
-    }
-}
-
-// User Retention Functions
-function saveFavoriteJoke() {
-    const currentJoke = document.getElementById('jokeText').textContent;
-    const jokeId = document.getElementById('jokeId').textContent;
-    
-    const favorites = JSON.parse(localStorage.getItem('favoriteJokes') || '[]');
-    const favorite = {
-        id: jokeId,
-        text: currentJoke,
-        timestamp: new Date().toISOString()
-    };
-    
-    // Check if already favorited
-    if (!favorites.find(fav => fav.id === jokeId)) {
-        favorites.push(favorite);
-        localStorage.setItem('favoriteJokes', JSON.stringify(favorites));
-        
-        if (window.aiJokeGenerator) {
-            window.aiJokeGenerator.showNotification('Joke saved to favorites! ❤️');
-            window.aiJokeGenerator.trackEvent('favorite_saved', { joke_id: jokeId });
-        }
-    } else {
-        if (window.aiJokeGenerator) {
-            window.aiJokeGenerator.showNotification('Already in favorites! ❤️');
-        }
-    }
-}
-
-function getDailyJoke() {
-    // Generate a special daily joke
-    if (window.aiJokeGenerator) {
-        window.aiJokeGenerator.generateAIJoke();
-        window.aiJokeGenerator.trackEvent('daily_joke_requested', {});
-    }
-}
-
-function subscribeNewsletter() {
-    const email = prompt('Enter your email to get daily jokes and updates:');
-    if (email && email.includes('@')) {
-        const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
-        if (!subscribers.includes(email)) {
-            subscribers.push(email);
-            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
-            
-            if (window.aiJokeGenerator) {
-                window.aiJokeGenerator.showNotification('Thanks for subscribing! 📧');
-                window.aiJokeGenerator.trackEvent('newsletter_subscribed', { email: email });
-            }
-        } else {
-            if (window.aiJokeGenerator) {
-                window.aiJokeGenerator.showNotification('Already subscribed! 📧');
-            }
-        }
-    }
-}
-
-// Performance Optimization
-function optimizePerformance() {
-    // Lazy load images
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy-load');
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-    
-    // Preload critical resources
-    const criticalResources = [
-        'styles.css',
-        'script.js'
-    ];
-    
-    criticalResources.forEach(resource => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = resource;
-        link.as = resource.endsWith('.css') ? 'style' : 'script';
-        document.head.appendChild(link);
-    });
-}
-
 // Service Worker for offline functionality
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -567,7 +716,53 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Initialize performance optimizations
-document.addEventListener('DOMContentLoaded', function() {
-    optimizePerformance();
+// Add smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add intersection observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.feature-card, .stat-card, .joke-card');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+    
+    // Initialize Ezoic Standalone - Optimized for multiple placements
+    if (typeof ezstandalone !== 'undefined') {
+        ezstandalone.cmd.push(function() {
+            // Single call for all placements - reduces server requests and improves loading speed
+            ezstandalone.showAds(101, 102, 103);
+        });
+    }
+    
+    // Ezoic Debugger Support
+    this.initializeEzoicDebugger();
 });
